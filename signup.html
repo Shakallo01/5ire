@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5IRE - Create Account</title>
+    <style>
+        :root {
+            --primary: #2a52be;
+            --secondary: #1a3a8f;
+            --accent: #00ffaa;
+            --dark: #0a1020;
+            --light: #f5f9ff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            display: flex;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 80% 20%, rgba(42, 82, 190, 0.15) 0%, transparent 25%),
+                radial-gradient(circle at 20% 80%, rgba(0, 255, 170, 0.1) 0%, transparent 25%);
+            overflow: hidden;
+        }
+        
+        .signup-container {
+            width: 100%;
+            max-width: 480px;
+            margin: auto;
+            padding: 2.5rem;
+            background: rgba(10, 16, 32, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(42, 82, 190, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .signup-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                transparent 45%,
+                rgba(0, 255, 170, 0.1) 50%,
+                transparent 55%
+            );
+            animation: rotate 20s linear infinite;
+            z-index: -1;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .logo img {
+            height: 50px;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            margin-top: 0.5rem;
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+        
+        .logo p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 0.5rem;
+        }
+        
+        .input-group {
+            margin-bottom: 1.25rem;
+            position: relative;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(42, 82, 190, 0.3);
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(0, 255, 170, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .phone-input {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(42, 82, 190, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .phone-prefix {
+            padding: 0 12px;
+            background: rgba(0, 255, 170, 0.1);
+            color: var(--accent);
+            font-size: 0.9rem;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+        
+        .phone-input input {
+            flex: 1;
+            border: none;
+            background: transparent !important;
+        }
+        
+        .password-strength {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+        
+        .strength-meter {
+            height: 100%;
+            width: 0%;
+            background: #ff4444;
+            transition: all 0.3s ease;
+        }
+        
+        .user-type-selector {
+            display: flex;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(42, 82, 190, 0.3);
+        }
+        
+        .user-type {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+        }
+        
+        .user-type.active {
+            background: rgba(0, 255, 170, 0.1);
+            color: var(--accent);
+            font-weight: 500;
+        }
+        
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            margin: 1.5rem 0;
+            font-size: 0.85rem;
+        }
+        
+        .terms input {
+            margin-right: 0.75rem;
+            margin-top: 0.2rem;
+        }
+        
+        .terms a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .signup-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+        
+        .signup-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(42, 82, 190, 0.4);
+        }
+        
+        .otp-verify-btn {
+            width: 100%;
+            padding: 14px;
+            background: rgba(0, 255, 170, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            color: var(--accent);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .otp-verify-btn svg {
+            margin-right: 0.5rem;
+        }
+        
+        .otp-verify-btn:hover {
+            background: rgba(0, 255, 170, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.8rem;
+        }
+        
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .divider::before {
+            margin-right: 1rem;
+        }
+        
+        .divider::after {
+            margin-left: 1rem;
+        }
+        
+        .login-link {
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .login-link a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(0, 255, 170, 0.5);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; }
+        }
+        
+        .matric-group {
+            display: none;
+        }
+        
+        .matric-group.visible {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    
+    <div class="signup-container">
+        <div class="logo">
+            <img src="nacos.png" alt="Nacos">
+            <h1>Join 5IRE Team</h1>
+            <p>Where Tomorrow's Leaders Code the Future</p>
+        </div>
+        
+        <form id="signupForm">
+            <div class="user-type-selector">
+                <div class="user-type active" data-type="regular">Regular User</div>
+                <div class="user-type" data-type="student">Student</div>
+            </div>
+            
+            <div class="input-group">
+                <label for="fullname">Full Name</label>
+                <input type="text" id="fullname" placeholder="Enter your full name" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="phone">Phone Number</label>
+                <div class="phone-input">
+                    <div class="phone-prefix">+234</div>
+                    <input type="tel" id="phone" placeholder="801 234 5678" required>
+                </div>
+            </div>
+            
+            <div class="input-group matric-group" id="matricGroup">
+                <label for="matric">Matriculation Number</label>
+                <input type="text" id="matric" placeholder="Enter your matric number">
+            </div>
+            
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Create a strong password" required>
+                <div class="password-strength">
+                    <div class="strength-meter" id="strength-meter"></div>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" placeholder="Confirm your password" required>
+            </div>
+            
+            <div class="terms">
+                <input type="checkbox" id="terms" required>
+                <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>. I understand that 5IRE may contact me about its products and services.</label>
+            </div>
+            
+            <button type="submit" class="signup-btn">Create Account</button>
+            
+            <button type="button" class="otp-verify-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+                Verify with OTP
+            </button>
+            
+            <div class="divider">OR</div>
+            
+            <div class="login-link">
+                Already have an account? <a href="Login.html">Log in</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Create floating particles
+        document.addEventListener('DOMContentLoaded', function() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 20;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random size between 2px and 6px
+                const size = Math.random() * 4 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Random animation duration and delay
+                const duration = Math.random() * 20 + 10;
+                const delay = Math.random() * 10;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+            
+            // Password strength meter
+            const passwordInput = document.getElementById('password');
+            const strengthMeter = document.getElementById('strength-meter');
+            
+            passwordInput.addEventListener('input', function() {
+                const password = passwordInput.value;
+                let strength = 0;
+                
+                // Length check
+                if (password.length > 7) strength += 1;
+                if (password.length > 11) strength += 1;
+                
+                // Character variety checks
+                if (password.match(/[A-Z]/)) strength += 1;
+                if (password.match(/[a-z]/)) strength += 1;
+                if (password.match(/[0-9]/)) strength += 1;
+                if (password.match(/[^A-Za-z0-9]/)) strength += 1;
+                
+                // Update meter
+                const width = strength * 20;
+                strengthMeter.style.width = `${width}%`;
+                
+                // Update color
+                if (width < 40) {
+                    strengthMeter.style.background = '#ff4444';
+                } else if (width < 80) {
+                    strengthMeter.style.background = '#ffbb33';
+                } else {
+                    strengthMeter.style.background = '#00C851';
+                }
+            });
+            
+            // User type selector
+            const userTypes = document.querySelectorAll('.user-type');
+            const matricGroup = document.getElementById('matricGroup');
+            
+            userTypes.forEach(type => {
+                type.addEventListener('click', function() {
+                    userTypes.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show/hide matric number field based on selection
+                    if (this.dataset.type === 'student') {
+                        matricGroup.classList.add('visible');
+                        document.getElementById('matric').setAttribute('required', '');
+                    } else {
+                        matricGroup.classList.remove('visible');
+                        document.getElementById('matric').removeAttribute('required');
+                    }
+                });
+            });
+            
+            // OTP verification button
+            const otpBtn = document.querySelector('.otp-verify-btn');
+            otpBtn.addEventListener('click', function() {
+                const phone = document.getElementById('phone').value;
+                if (!phone) {
+                    alert('Please enter your phone number first');
+                    return;
+                }
+                
+                // Simulate OTP sending
+                otpBtn.innerHTML = `
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    OTP Sent to +234${phone}
+                `;
+                
+                // Enable OTP input (you would add this functionality)
+                setTimeout(() => {
+                    alert(`OTP has been sent to +234${phone}. In a real implementation, you would verify it.`);
+                }, 1500);
+            });
+            
+            // Form submission
+            const form = document.getElementById('signupForm');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Validate passwords match
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
+                
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match!');
+                    return;
+                }
+                
+                // Simulate successful registration
+                alert('Account created successfully! Redirecting to dashboard...');
+                // In a real implementation, you would submit the form here
+            });
+        });
+    </script>
+</body>
+</html>

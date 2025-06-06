@@ -1,0 +1,378 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - 5th Industrial Revolution Emperors</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #4a6bff;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #4a6bff;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+        }
+        
+        .login-btn {
+            padding: 8px 20px;
+            margin-right: 10px;
+            background: none;
+            border: none;
+            color: #333;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .login-btn:hover {
+            color: #4a6bff;
+        }
+        
+        .signup-btn {
+            padding: 8px 20px;
+            background-color: #4a6bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .signup-btn:hover {
+            background-color: #3a56d4;
+        }
+        
+        .about-hero {
+            background: linear-gradient(135deg, #4a6bff 0%, #3a56d4 100%);
+            color: white;
+            padding: 100px 5%;
+            text-align: center;
+        }
+        
+        .about-hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .about-hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .mission-vision {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 80px 5%;
+            gap: 40px;
+        }
+        
+        .mission, .vision {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .mission h2, .vision h2 {
+            color: #4a6bff;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        .mission p, .vision p {
+            color: #495057;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+        
+        .team-section {
+            padding: 80px 5%;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+        
+        .team-section h2 {
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: #212529;
+        }
+        
+        .team-members {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .team-member {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            width: 280px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+        
+        .member-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 5px solid #f1f3f5;
+        }
+        
+        .member-name {
+            font-size: 20px;
+            margin-bottom: 5px;
+            color: #212529;
+        }
+        
+        .member-role {
+            color: #4a6bff;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .join-cta {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 80px 5%;
+            text-align: center;
+        }
+        
+        .join-cta h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #212529;
+        }
+        
+        .join-cta p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: #495057;
+        }
+        
+        .cta-btn {
+            padding: 12px 30px;
+            background-color: #4a6bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cta-btn:hover {
+            background-color: #3a56d4;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        footer {
+            background-color: #212529;
+            color: white;
+            padding: 50px 5%;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section {
+            width: 250px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-section ul li a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section ul li a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            border-top: 1px solid #495057;
+            padding-top: 20px;
+            color: #adb5bd;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><img src="nacos.png" alt="Nacos"></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="features.html">Features</a></li>
+            <li><a href="news.html">News</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="auth-buttons">
+            <button class="login-btn"><a href="login.html">Login</a></button>
+            <button class="signup-btn"><a href="signup.html" style="color: white;">Sign Up</a></button>
+        </div>
+    </nav>
+    
+    <section class="about-hero">
+        <h1>About 5th Industrial Revolution Emperors</h1>
+        <p>Founded in 2025, we are a new collective of visionary students building the future through technology, leadership, and real-world impact. Our mission is to bridge the gap between academic learning and practical implementation in the 5th Industrial Revolution.</p>
+    </section>
+    
+    <section class="mission-vision">
+        <div class="mission">
+            <h2>Our Mission</h2>
+            <p>To empower the next generation of technologists and leaders with the skills, knowledge, and ethical framework needed to drive the 5th Industrial Revolution. We combine cutting-edge technology education with leadership development to create solutions for global challenges.</p>
+        </div>
+        <div class="vision">
+            <h2>Our Vision</h2>
+            <p>A world where students are not just passive learners but active architects of the future. We envision a decentralized, technologically advanced society where young innovators lead the transformation across industries, governments, and communities.</p>
+        </div>
+    </section>
+    
+    <section class="team-section">
+        <h2>Meet Our Visionaries Leaders</h2>
+        <div class="visionary leader">
+            <div class="visionary leader">
+                <img src="kallo.jpg" alt="visionary leader" class="member-image">
+                <h3 class="member-name">Idris Shakallo</h3>
+                <p class="member-role">visionary leader</p>
+                <p>Blockchain architect and Web3 pioneer with a passion for decentralized education systems.</p>
+            </div>
+            <div class="visionary leader">
+                <img src="hauwa.jpg" alt="visionary leader" class="member-image">
+                <h3 class="member-name">Hauwa Mohammad</h3>
+                <p class="member-role">visionary leader</p>
+                <p>Machine learning expert focused on ethical AI development and implementation.</p>
+            </div>
+            <div class="visionary leader">
+                <img src="datti.jpg" alt="visionary leader" class="member-image">
+                <h3 class="member-name">Nuhu Datti</h3>
+                <p class="member-role">visionary leader</p>
+                <p>Tech policy specialist bridging the gap between innovation and governance.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="join-cta">
+        <h2>Be Part of Our Team</h2>
+        <p>As a newly established organization in 2025, we're looking for pioneering members to help shape our journey from the beginning. Join us in building the future of technology and society.</p>
+        <button class="cta-btn"><a href="signup.html">Become a team Member</a></button>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>5th Industrial Revolution Emperors (5IRE) is a new student movement founded in 2025 to pioneer the future through technology, leadership, and real-world impact.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="news">News</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">Email Us</a></li>
+                    <li><a href="#">Support</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="signup.html">Join the Movement</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 5th Industrial Revolution Emperors. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
